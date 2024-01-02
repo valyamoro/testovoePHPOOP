@@ -2,8 +2,12 @@
 
 namespace app\core;
 
+use PDODriver;
+
 abstract class Model
 {
+    public const TABLE_NAME = '';
+
     public const RULE_REQUIRED = 'required';
     public const RULE_EMAIL = 'email';
     public const RULE_MIN = 'min';
