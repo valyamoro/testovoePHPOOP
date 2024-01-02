@@ -1,0 +1,9 @@
+{
+    "name": "kutlumbek/mvc-frame-php.my",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {}
+}
