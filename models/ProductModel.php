@@ -7,10 +7,17 @@ use app\database\PDODriver;
 
 class ProductModel extends Model
 {
-    const TABLE_NAME = 'table_name';
+    const TABLE_NAME = 'products';
+
+//    public string $imagePath;
+    public string $name;
+    public int $price;
+    public string $description;
+
     public function __construct(
         protected PDODriver $builder,
     ) {}
+
     public function getAll(): array
     {
         $query = 'SELECT * FROM ' . static::TABLE_NAME;
@@ -20,6 +27,12 @@ class ProductModel extends Model
 
     public function rules(): array
     {
-        return [];
+        return [
+            'imagePath' => [self::RULE_REQUIRED],
+            'name' => [self::RULE_REQUIRED],
+            'price' => [self::RULE_REQUIRED],
+            'description' => [self::RULE_REQUIRED],
+        ];
     }
+
 }
