@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use app\controllers\AddProductController;
 use app\core\Application;
 use app\controllers\SideController;
 use app\database\DatabaseConfiguration;
@@ -20,16 +21,11 @@ function dump(mixed $data): void
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$data = require __DIR__ . '/../config/db.php';
-$databaseConfiguration = new DatabaseConfiguration(...$data['pdo']);
-$databasePDOConnection = new DatabasePDOConnection($databaseConfiguration);
-$pdoDriver = new PDODriver($databasePDOConnection->connection());
-
-$model = new ProductModel($pdoDriver);
-print_r($model->getAll());
-
 $app = new Application(\dirname(__DIR__));
 
 $app->router->get('/', [SideController::class, 'home']);
+
+$app->router->get('/addProduct', [AddProductController::class, 'addProduct']);
+$app->router->post('/addProduct', [AddProductController::class, 'addProduct']);
 
 $app->run();

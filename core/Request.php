@@ -44,6 +44,13 @@ class Request
             foreach ($_POST as $key => $value) {
                 $body[$key] = \filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
+
+            if (!empty($_FILES)) {
+                // Должна отправляться в отдельный метод который будет парсить изображение и вычленять оттуда путь.
+                foreach ($_FILES as $key => $value) {
+                    $body[$key] = $value;
+                }
+            }
         }
 
         return $body;

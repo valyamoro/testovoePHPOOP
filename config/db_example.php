@@ -4,7 +4,7 @@ return [
     'pdo' => [
         'port' => 'mysql',
         'host' => 'localhost',
-        'dbname' => 'testovoe',
+        'dbname' => 'books2',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8mb4',
