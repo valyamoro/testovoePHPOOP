@@ -10,6 +10,7 @@ class ProductModel extends Model
     const TABLE_NAME = 'products';
 
 //    public string $imagePath;
+    public int $id;
     public string $name;
     public int $price;
     public string $description;

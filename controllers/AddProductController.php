@@ -22,6 +22,7 @@ class AddProductController extends Controller
         $addProductModel = new AddProductModel($pdoDriver);
 
         if ($request->isPost()) {
+            dump($request->getBody());
             $addProductModel->loadData($request->getBody());
             if (true) {
                 $data = [
