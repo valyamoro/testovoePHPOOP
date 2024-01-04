@@ -3,27 +3,26 @@
 namespace app\controllers;
 
 use app\core\Controller;
+use app\core\Request;
 use app\database\DatabaseConfiguration;
 use app\database\DatabasePDOConnection;
 use app\database\PDODriver;
-use app\models\ProductModel;
+use app\models\DeleteProductModel;
 
-class SideController extends Controller
+class DeleteProductController extends Controller
 {
-    public static function home(): string
+    public function deleteProduct(Request $request): void
     {
-        // Сделать статический метод getPDODriver в Controller, т.к объект не нужен.
         $data = require __DIR__ . '/../config/db.php';
         $databaseConfiguration = new DatabaseConfiguration(...$data['pdo']);
         $databasePDOConnection = new DatabasePDOConnection($databaseConfiguration);
         $pdoDriver = new PDODriver($databasePDOConnection->connection());
 
-        $productModel = new ProductModel($pdoDriver);
-        $products = $productModel->getAll();
+        $deleteProductModel = new DeleteProductModel($pdoDriver);
 
-        return self::render('home', [
-            'products' => $products,
-        ]);
+        $deleteProductModel->deleteProduct($_GET['id']);
+
+        header('Location: /');
     }
 
 }

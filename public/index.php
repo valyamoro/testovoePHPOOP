@@ -1,16 +1,13 @@
 <?php
 declare(strict_types=1);
-
-use app\controllers\AddProductController;
-use app\core\Application;
-use app\controllers\SideController;
-use app\database\DatabaseConfiguration;
-use app\database\DatabasePDOConnection;
-use app\database\PDODriver;
-use app\models\ProductModel;
-
 \error_reporting(-1);
 \session_start();
+
+use app\controllers\AddProductController;
+use app\controllers\DeleteProductController;
+use app\controllers\EditProductController;
+use app\core\Application;
+use app\controllers\SideController;
 
 function dump(mixed $data): void
 {
@@ -27,5 +24,11 @@ $app->router->get('/', [SideController::class, 'home']);
 
 $app->router->get('/addProduct', [AddProductController::class, 'addProduct']);
 $app->router->post('/addProduct', [AddProductController::class, 'addProduct']);
+
+$app->router->get('/editProduct', [EditProductController::class, 'editProduct']);
+$app->router->post('/editProduct', [EditProductController::class, 'editProduct']);
+
+$app->router->get('/deleteProduct', [DeleteProductController::class, 'deleteProduct']);
+$app->router->post('/deleteProduct', [DeleteProductController::class, 'deleteProduct']);
 
 $app->run();
