@@ -9,10 +9,12 @@ class ProductModel extends Model
 {
     const TABLE_NAME = 'products';
 
-//    public string $imagePath;
+    public string $imagePath;
     public string $name;
-    public int $price;
+    public string|int $price;
     public string $description;
+    public string $createdAt;
+    public string $updatedAt;
 
     public function __construct(
         protected PDODriver $builder,

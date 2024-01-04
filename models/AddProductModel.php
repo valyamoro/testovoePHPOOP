@@ -18,4 +18,14 @@ class AddProductModel extends ProductModel
         return $this->builder->lastInsertId();
     }
 
+    public function uploadImage(array $data): string
+    {
+        // Потом сделать так чтобы папка автоматически создавалась при заходе на сайт.
+        $filePath = __DIR__ . '\..\uploads\\' . \uniqid() . $data['name'];
+
+        \move_uploaded_file($data['tmp_name'], $filePath);
+
+        return '\..\\' . \strstr($filePath, 'uploads');
+    }
+
 }
