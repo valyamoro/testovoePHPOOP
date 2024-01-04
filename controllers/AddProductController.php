@@ -14,16 +14,10 @@ class AddProductController extends Controller
 {
     public function addProduct(Request $request): string
     {
-        $data = require __DIR__ . '/../config/db.php';
-        $databaseConfiguration = new DatabaseConfiguration(...$data['pdo']);
-        $databasePDOConnection = new DatabasePDOConnection($databaseConfiguration);
-        $pdoDriver = new PDODriver($databasePDOConnection->connection());
-
-        $addProductModel = new AddProductModel($pdoDriver);
+        $addProductModel = new AddProductModel(self::getPDO());
 
         if ($request->isPost()) {
             $product = $request->getBody();
-          
             $imagePath = $addProductModel->uploadImage($product['image']);
             $now = \date('Y-m-d H:i:s');
           
@@ -37,8 +31,8 @@ class AddProductController extends Controller
             ];
 
             $addProductModel->loadData($data);
-            // Пока без валидации.
-            if (true) {
+
+            if ($addProductModel->validate()) {
                 $data = [
                     'image_path' => $addProductModel->imagePath,
                     'name' => $addProductModel->name,
@@ -53,6 +47,7 @@ class AddProductController extends Controller
 
             return $this->render('addProduct', [
                 'model' => $addProductModel,
+                'errors' => $addProductModel->errors,
             ]);
         }
 

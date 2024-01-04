@@ -16,6 +16,13 @@ function dump(mixed $data): void
     echo '</pre>';
 }
 
+$itemsDirectory = ['../uploads'];
+foreach ($itemsDirectory as $item) {
+    if (!\is_dir($item)) {
+        \mkdir($item, 0777, true);
+    }
+}
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = new Application(\dirname(__DIR__));

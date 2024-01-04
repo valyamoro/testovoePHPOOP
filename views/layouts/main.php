@@ -20,9 +20,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
-                </li>
             </ul>
 
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
@@ -36,7 +33,6 @@
 </nav>
 <div class="container">
     {{content}}
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

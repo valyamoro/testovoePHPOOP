@@ -1,8 +1,8 @@
+<?php foreach ($errors as $error): ?>
+<?php echo $error[0]; ?> <br>
+<?php endforeach; ?>
+
 <form action="" method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label for="image" class="form-label">Фото поста</label>
-        <input type="file" name="image" class="form-control" id="image">
-    </div>
     <div class="mb-3">
         <label for="name" class="form-label">Название</label>
         <label for="name"></label><input type="text" name="name" class="form-control" id="name">
@@ -15,5 +15,9 @@
         <label for="price" class="form-label">Цена</label>
         <input type="text" name="price" class="form-control" id="price">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="mb-3">
+        <label for="image" class="form-label">Изображение</label>
+        <input type="file" name="image" class="form-control" id="image">
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить товар</button>
 </form>

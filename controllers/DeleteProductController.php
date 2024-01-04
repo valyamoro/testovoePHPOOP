@@ -13,12 +13,7 @@ class DeleteProductController extends Controller
 {
     public function deleteProduct(Request $request): void
     {
-        $data = require __DIR__ . '/../config/db.php';
-        $databaseConfiguration = new DatabaseConfiguration(...$data['pdo']);
-        $databasePDOConnection = new DatabasePDOConnection($databaseConfiguration);
-        $pdoDriver = new PDODriver($databasePDOConnection->connection());
-
-        $deleteProductModel = new DeleteProductModel($pdoDriver);
+        $deleteProductModel = new DeleteProductModel(self::getPDO());
 
         $deletedImagePath = $deleteProductModel->getImageById($_GET['id'])['image_path'];
         if (!empty($deletedImagePath)) {
@@ -27,7 +22,7 @@ class DeleteProductController extends Controller
 
         $deleteProductModel->deleteProduct($_GET['id']);
 
-        header('Location: /');
+        \header('Location: /');
     }
 
 }
