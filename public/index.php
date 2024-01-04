@@ -6,6 +6,7 @@ declare(strict_types=1);
 use app\controllers\AddProductController;
 use app\controllers\DeleteProductController;
 use app\controllers\EditProductController;
+use app\controllers\UpdatePriceController;
 use app\core\Application;
 use app\controllers\SideController;
 
@@ -37,5 +38,7 @@ $app->router->post('/editProduct', [EditProductController::class, 'editProduct']
 
 $app->router->get('/deleteProduct', [DeleteProductController::class, 'deleteProduct']);
 $app->router->post('/deleteProduct', [DeleteProductController::class, 'deleteProduct']);
+
+$app->router->post('/updatePrice', [UpdatePriceController::class, 'updatePrice']);
 
 $app->run();
