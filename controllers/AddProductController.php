@@ -22,18 +22,32 @@ class AddProductController extends Controller
         $addProductModel = new AddProductModel($pdoDriver);
 
         if ($request->isPost()) {
-            dump($request->getBody());
-            $addProductModel->loadData($request->getBody());
+            $product = $request->getBody();
+          
+            $imagePath = $addProductModel->uploadImage($product['image']);
+            $now = \date('Y-m-d H:i:s');
+          
+            $data = [
+                'imagePath' => $imagePath,
+                'name' => $product['name'],
+                'price' => $product['price'],
+                'description' => $product['description'],
+                'createdAt' => $now,
+                'updatedAt' => $now,
+            ];
+
+            $addProductModel->loadData($data);
+            // Пока без валидации.
             if (true) {
                 $data = [
-//                    'image_path' => $addProductModel->imagePath['name'],
-                    'image_path' => '',
+                    'image_path' => $addProductModel->imagePath,
                     'name' => $addProductModel->name,
                     'price' => $addProductModel->price,
                     'description' => $addProductModel->description,
-                    'created_at' => \date('Y-m-d H:i:s'),
-                    'updated_at' => \date('Y-m-d H:i:s'),
+                    'created_at' => $addProductModel->createdAt,
+                    'updated_at' => $addProductModel->updatedAt,
                 ];
+
                 $addProductModel->insert($data);
             }
 

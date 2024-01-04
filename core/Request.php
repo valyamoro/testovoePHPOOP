@@ -47,9 +47,7 @@ class Request
 
             if (!empty($_FILES)) {
                 // Должна отправляться в отдельный метод который будет парсить изображение и вычленять оттуда путь.
-                foreach ($_FILES as $key => $value) {
-                    $body[$key] = $value;
-                }
+                $body['image'] = $_FILES['image'];
             }
         }
 
