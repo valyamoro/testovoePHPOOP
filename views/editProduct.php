@@ -1,3 +1,7 @@
+<?php foreach ($errors as $error): ?>
+    <?php echo $error[0]; ?> <br>
+<?php endforeach; ?>
+
 <form action="" method="post" enctype="multipart/form-data">
 <!-- Тут должны подставляться текущие значения из базы данных, сделать на js -->
     <div class="mb-3">

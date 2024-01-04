@@ -35,7 +35,7 @@ class EditProductController extends Controller
 
             $editProductModel->loadData($data);
 
-            if (true) {
+            if ($editProductModel->validate()) {
                 $data = [
                     'image_path' => $editProductModel->imagePath,
                     'name' => $editProductModel->name,
@@ -49,6 +49,7 @@ class EditProductController extends Controller
 
             return $this->render('editProduct', [
                 'model' => $editProductModel,
+                'errors' => $editProductModel->errors,
             ]);
         }
         $this->setLayout('main');
