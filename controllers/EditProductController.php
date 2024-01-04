@@ -21,14 +21,32 @@ class EditProductController extends Controller
         $editProductModel = new EditProductModel($pdoDriver);
 
         if ($request->isPost()) {
-            $editProductModel->loadData($request->getBody());
+            $product = $request->getBody();
+
+            $deletedImagePath = $editProductModel->getImageById($_GET['id'])['image_path'];
+            if (!empty($deletedImagePath)) {
+                \unlink(__DIR__ . $deletedImagePath);
+            }
+
+            $imagePath = $editProductModel->uploadImage($product['image']);
+
+            $data = [
+                'imagePath' => $imagePath,
+                'name' => $product['name'],
+                'price' => $product['price'],
+                'description' => $product['description'],
+                'updatedAt' => \date('Y-m-d H:i:s'),
+            ];
+
+            $editProductModel->loadData($data);
+
             if (true) {
                 $data = [
-                    'image_path' => '',
+                    'image_path' => $editProductModel->imagePath,
                     'name' => $editProductModel->name,
                     'price' => $editProductModel->price,
                     'description' => $editProductModel->description,
-                    'updated_at' => \date('Y-m-d H:i:s'),
+                    'updated_at' => $editProductModel->updatedAt,
                 ];
 
                 $editProductModel->update($data, $_GET['id']);
@@ -43,4 +61,5 @@ class EditProductController extends Controller
             'model' => $editProductModel,
         ]);
     }
+    
 }
