@@ -14,4 +14,13 @@ class DeleteProductModel extends ProductModel
         return (bool)$result;
     }
 
+    public function getImageById(int $id): array
+    {
+        $query = 'SELECT image_path FROM ' . static::TABLE_NAME . ' WHERE id=? LIMIT 1';
+
+        $this->builder->prepare($query)->execute([$id]);
+
+        return $this->builder->fetch();
+    }
+
 }
