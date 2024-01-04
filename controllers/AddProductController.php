@@ -14,12 +14,7 @@ class AddProductController extends Controller
 {
     public function addProduct(Request $request): string
     {
-        $data = require __DIR__ . '/../config/db.php';
-        $databaseConfiguration = new DatabaseConfiguration(...$data['pdo']);
-        $databasePDOConnection = new DatabasePDOConnection($databaseConfiguration);
-        $pdoDriver = new PDODriver($databasePDOConnection->connection());
-
-        $addProductModel = new AddProductModel($pdoDriver);
+        $addProductModel = new AddProductModel(self::getPDO());
 
         if ($request->isPost()) {
             $product = $request->getBody();

@@ -13,12 +13,7 @@ class EditProductController extends Controller
 {
     public function editProduct(Request $request): string
     {
-        $data = require __DIR__ . '/../config/db.php';
-        $databaseConfiguration = new DatabaseConfiguration(...$data['pdo']);
-        $databasePDOConnection = new DatabasePDOConnection($databaseConfiguration);
-        $pdoDriver = new PDODriver($databasePDOConnection->connection());
-
-        $editProductModel = new EditProductModel($pdoDriver);
+        $editProductModel = new EditProductModel(self::getPDO());
 
         if ($request->isPost()) {
             $product = $request->getBody();
