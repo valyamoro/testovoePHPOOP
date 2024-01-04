@@ -1,6 +1,10 @@
+<?php foreach ($errors as $error): ?>
+<?php echo $error[0]; ?> <br>
+<?php endforeach; ?>
+
 <form action="" method="post" enctype="multipart/form-data">
     <div class="mb-3">
-        <label for="image" class="form-label">Фото поста</label>
+        <label for="image" class="form-label">Изображение</label>
         <input type="file" name="image" class="form-control" id="image">
     </div>
     <div class="mb-3">

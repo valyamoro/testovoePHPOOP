@@ -18,7 +18,6 @@ class AddProductController extends Controller
 
         if ($request->isPost()) {
             $product = $request->getBody();
-          
             $imagePath = $addProductModel->uploadImage($product['image']);
             $now = \date('Y-m-d H:i:s');
           
@@ -32,8 +31,8 @@ class AddProductController extends Controller
             ];
 
             $addProductModel->loadData($data);
-            // Пока без валидации.
-            if (true) {
+
+            if ($addProductModel->validate()) {
                 $data = [
                     'image_path' => $addProductModel->imagePath,
                     'name' => $addProductModel->name,
@@ -48,6 +47,7 @@ class AddProductController extends Controller
 
             return $this->render('addProduct', [
                 'model' => $addProductModel,
+                'errors' => $addProductModel->errors,
             ]);
         }
 
