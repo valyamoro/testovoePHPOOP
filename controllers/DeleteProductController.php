@@ -20,6 +20,11 @@ class DeleteProductController extends Controller
 
         $deleteProductModel = new DeleteProductModel($pdoDriver);
 
+        $deletedImagePath = $deleteProductModel->getImageById($_GET['id'])['image_path'];
+        if (!empty($deletedImagePath)) {
+            \unlink(__DIR__ . $deletedImagePath);
+        }
+
         $deleteProductModel->deleteProduct($_GET['id']);
 
         header('Location: /');
